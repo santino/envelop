@@ -5,7 +5,9 @@
   "workspaces": [
     "./packages/*",
     "./packages/plugins/*",
-    "./examples/*"
+    "./examples/*",
+    "./benchmarks/apis/*",
+    "./benchmarks/bench"
   ],
   "scripts": {
     "benchmark": "NODE_ENV=production ts-node --project tsconfig.benchmark.json benchmark/execute.case.ts",
