@@ -14,6 +14,7 @@ const dataArray: any[] = [];
 
 (async () => {
   const cpuData = si.cpu();
+  const osData = si.osInfo();
 
   let files = await promises.readdir(resolve(__dirname, '../raw_results/')).then(data => {
     return data
@@ -55,7 +56,7 @@ const dataArray: any[] = [];
   console.log(tableString);
 
   await cpuData.then(async data => {
-    const fileName = `Node_${process.version}_${data.manufacturer}_${data.brand}_${finish}`
+    const fileName = `Node_${process.version}_${(await osData).distro}_${data.manufacturer}_${data.brand}_${finish}`
       .replace(/ /g, '_')
       .replace(/:|\./g, '_');
 
