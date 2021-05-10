@@ -21,8 +21,8 @@ const instance = autocannon(
   async (err, result) => {
     if (err) console.error(err);
 
-    await mkdirp('results');
-    const fileName = resolve('results/' + result.title + '.json');
+    await mkdirp('raw_results');
+    const fileName = resolve('raw_results/' + result.title + '.json');
 
     writeFile(fileName, JSON.stringify(result, null, 2), {
       encoding: 'utf-8',

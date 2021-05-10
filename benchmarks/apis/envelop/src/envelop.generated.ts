@@ -1,4 +1,5 @@
 import type { GraphQLResolveInfo } from 'graphql';
+import type { EnvelopContext } from '@pablosz/envelop-app/fastify';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -135,7 +136,7 @@ export type ResolversParentTypes = {
 };
 
 export type AuthorResolvers<
-  ContextType = any,
+  ContextType = EnvelopContext,
   ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']
 > = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -147,7 +148,7 @@ export type AuthorResolvers<
 };
 
 export type BookResolvers<
-  ContextType = any,
+  ContextType = EnvelopContext,
   ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']
 > = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -157,13 +158,13 @@ export type BookResolvers<
 };
 
 export type QueryResolvers<
-  ContextType = any,
+  ContextType = EnvelopContext,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
   authors?: Resolver<Array<ResolversTypes['Author']>, ParentType, ContextType>;
 };
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = EnvelopContext> = {
   Author?: AuthorResolvers<ContextType>;
   Book?: BookResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
@@ -173,7 +174,7 @@ export type Resolvers<ContextType = any> = {
  * @deprecated
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
-export type IResolvers<ContextType = any> = Resolvers<ContextType>;
+export type IResolvers<ContextType = EnvelopContext> = Resolvers<ContextType>;
 
 declare module '@pablosz/envelop-app/fastify' {
   interface EnvelopResolvers extends Resolvers<import('@pablosz/envelop-app/fastify').EnvelopContext> {}

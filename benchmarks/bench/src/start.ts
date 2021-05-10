@@ -126,7 +126,7 @@ async function benchVanilla() {
 }
 
 (async () => {
-  await concurrently(['rimraf results', 'yarn prepare'], {
+  await concurrently(['rimraf raw_results', 'yarn prepare'], {
     raw: true,
   });
 
@@ -141,9 +141,4 @@ async function benchVanilla() {
   await concurrently(['yarn results'], {
     raw: true,
   });
-})();
-
-process.on('unhandledRejection', err => {
-  console.error(err);
-  process.exit(1);
-});
+})().catch(console.error);

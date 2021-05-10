@@ -1,6 +1,7 @@
 {
   "name": "envelop-api",
   "version": "1.0.0",
+  "private": true,
   "license": "MIT",
   "author": "PabloSz <pablosaez1995@gmail.com>",
   "main": "dist/index.js",
@@ -9,11 +10,11 @@
     "start": "tsup src/index.ts --minify --silent --onSuccess \"cross-env NODE_ENV=production node dist/index.js\""
   },
   "dependencies": {
-    "@envelop/core": "^0.1.4",
-    "@envelop/graphql-jit": "^0.1.0",
-    "@envelop/parser-cache": "^0.1.0",
-    "@envelop/types": "^0.1.4",
-    "@envelop/validation-cache": "^0.1.0",
+    "@envelop/core": "*",
+    "@envelop/graphql-jit": "*",
+    "@envelop/parser-cache": "*",
+    "@envelop/types": "*",
+    "@envelop/validation-cache": "*",
     "@pablosz/envelop-app": "^0.1.17",
     "cross-env": "^7.0.3",
     "envelop-bench": "1.0.0",

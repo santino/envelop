@@ -1,9 +1,9 @@
 {
   "name": "envelop-raw",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
   "license": "MIT",
-  "author": "",
+  "author": "PabloSz <pablosaez1995@gmail.com>",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsup src/index.ts --minify --watch --silent --onSuccess \"cross-env PORT=3000 node dist/index.js\"",
@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "@envelop/core": "*",
-    "@envelop/graphql-jit": "^0.1.0",
-    "@envelop/parser-cache": "^0.1.0",
-    "@envelop/validation-cache": "^0.1.0",
+    "@envelop/graphql-jit": "*",
+    "@envelop/parser-cache": "*",
+    "@envelop/validation-cache": "*",
     "@types/node": "^15.0.2",
+    "envelop-bench": "1.0.0",
     "fastify": "^3.15.1",
     "graphql": "^15.5.0",
     "require-env-variable": "^3.1.2",
-    "envelop-bench": "1.0.0",
     "tsup": "^4.10.1",
     "typescript": "^4.2.4"
   }
