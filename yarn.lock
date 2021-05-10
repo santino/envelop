@@ -1539,17 +1539,14 @@
     "@opentelemetry/semantic-conventions" "0.19.0"
     lodash.merge "^4.6.2"
 
-"@pablosz/envelop-app@^0.1.13":
-  version "0.1.15"
-  resolved "https://registry.yarnpkg.com/@pablosz/envelop-app/-/envelop-app-0.1.15.tgz#7f4e826c678ae671eb6312a80f65c0969dbd3647"
-  integrity sha512-VoVSEspZcUVMZ929/9mK4m9jK+gLIMiC7zVC+85B65HQLFZh6dBAkL6On0I6MbjT6aHlUog/zm68fQfC385Ijg==
+"@pablosz/envelop-app@^0.1.17":
+  version "0.1.17"
+  resolved "https://registry.yarnpkg.com/@pablosz/envelop-app/-/envelop-app-0.1.17.tgz#d3b62a86c27cbb137d8bad3ab2f550860bf8f821"
+  integrity sha512-hO14+vecBYRUIScDcUos1f8698kouieeLM0OOEShbp2va2I2FkOQ+7VSUwrycAdIMbZU1qWvdhiJ6w+yu+50MA==
   dependencies:
-    "@envelop/core" "^0.1.4"
     "@envelop/dataloader" "^0.1.0"
-    "@envelop/graphql-jit" "^0.1.0"
     "@envelop/graphql-modules" "^0.1.0"
     "@envelop/parser-cache" "^0.1.0"
-    "@envelop/types" "^0.1.4"
     "@envelop/validation-cache" "^0.1.0"
     "@graphql-codegen/core" "^1.17.9"
     "@graphql-codegen/plugin-helpers" "^1.18.5"
