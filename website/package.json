@@ -4,7 +4,7 @@
   "description": "Envelop Website",
   "license": "MIT",
   "scripts": {
-    "build": "next build",
+    "build": "node --version && next build",
     "dev": "concurrently -r next \"wait-on -s 1 http://localhost:3000 && open-cli http://localhost:3000\"",
     "next": "next",
     "prepare-lock": "strict-npm-engines && npm install --package-lock-only",
