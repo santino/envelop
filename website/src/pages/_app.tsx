@@ -6,7 +6,7 @@ import { appWithTranslation } from 'next-i18next';
 import { ReactNode, useMemo } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 
-import { Box, ChakraProvider, extendTheme, Stack } from '@chakra-ui/react';
+import { Box, ChakraProvider, extendTheme, chakra, Stack } from '@chakra-ui/react';
 
 import { NextNProgress, MdxInternalProps, MDXNavigation, iterateRoutes, components, ExtendComponents } from '@guild-docs/client';
 
@@ -16,10 +16,18 @@ const theme = extendTheme({
   colors: {},
 });
 
+const a = chakra('a', {
+  baseStyle: {
+    fontWeight: 'bold',
+    color: 'blue.600',
+  },
+});
+
 ExtendComponents({
   HelloWorld() {
     return <p>Hello World!</p>;
   },
+  a,
 });
 
 export function AppThemeProvider({ children }: { children: ReactNode }) {

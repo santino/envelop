@@ -1359,20 +1359,20 @@
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
   integrity sha512-wYn6r8zVZyQJ6rQaALBEln5B1pzxb9shV5Ef97kTvn6yVGrqyXVnDqnU24MXnFubR+rZjBY9NWuxX3FB2sTsjg==
 
-"@guild-docs/client@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@guild-docs/client/-/client-0.0.1.tgz#fc5a87e606325efe8b81c72830c7295f05ab8c4c"
-  integrity sha512-jS1qL9fNaXDHaZdmQgmFHtOH3Byd3ft+M3NDclOgZazuSxhLjywBXLkB4F4G3NdKtY2A0DQliWBm8n2OD5TSwA==
+"@guild-docs/client@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@guild-docs/client/-/client-0.0.6.tgz#2dd948efc1075d2db4716681279079c81385143b"
+  integrity sha512-TaCk2ka8ECWmG0ahCwovLENBvWv4vhX5HvojScTHcjfNSXeGWo1ct081X8iaNPBCQoBysT73Zl0/PGl0CDnI/A==
   dependencies:
     "@guild-docs/types" "^0.0.1"
     next-i18next "^8.2.0"
     next-mdx-remote "^3.0.1"
     nprogress "^0.2.0"
 
-"@guild-docs/server@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@guild-docs/server/-/server-0.0.1.tgz#511e86a8219744acef11b7c187a22ed8b7906e8a"
-  integrity sha512-vZLXrVp5tDbv8q0ETv/RrLSlicaBXmGb508OE726e2p7lYeQGtAFDQSqT0nr/Z7lntqEIjXd9Kwip9mkZf6L8g==
+"@guild-docs/server@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@guild-docs/server/-/server-0.0.2.tgz#5310d5658784fe5655c5d61fe2c0a8fcce57f1e4"
+  integrity sha512-N4v1lnKS22Uclc38lcO9nws7FMTk4nSeqDTgxGyqh4w8H0U/joqn9GTmERjRL5/+lOtCJS9QrzusTtf6KCr47A==
   dependencies:
     "@guild-docs/types" "^0.0.1"
     globby "^11.0.3"
@@ -8576,6 +8576,11 @@ prettier@^1.19.1:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
+
+prettier@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.0.tgz#b6a5bf1284026ae640f17f7ff5658a7567fc0d18"
+  integrity sha512-kXtO4s0Lz/DW/IJ9QdWhAf7/NmPWQXkFr/r/WkR3vyI+0v8amTDxiaQSLzs8NBlytfLWX/7uQUMIW677yLKl4w==
 
 pretty-format@^26.0.0, pretty-format@^26.6.2:
   version "26.6.2"
