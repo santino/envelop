@@ -2,6 +2,7 @@ import 'prism-themes/themes/prism-atom-dark.css';
 import 'tailwindcss/tailwind.css';
 
 import { appWithTranslation } from 'next-i18next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactNode, useMemo } from 'react';
 
@@ -35,6 +36,14 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
 }
 
+const GuildHeader = dynamic<unknown>(() => import('../components/GuildHeader').then(v => v.GuildHeader), {
+  ssr: false,
+  loading() {
+    // We can set a skeleton to not have it suddenly appear and moving everything down
+    return null;
+  },
+});
+
 const serializedMdx = process.env.SERIALIZED_MDX_ROUTES;
 let mdxRoutesData = serializedMdx && JSON.parse(serializedMdx);
 
@@ -55,11 +64,14 @@ function App({ Component, pageProps }: AppProps) {
       <NextNProgress />
       <MDXProvider components={components}>
         <AppThemeProvider>
-          <Stack isInline>
-            <Box maxW="280px" width="100%">
-              {Navigation}
-            </Box>
-            <Component {...pageProps} />
+          <Stack>
+            <GuildHeader />
+            <Stack isInline>
+              <Box maxW="280px" width="100%">
+                {Navigation}
+              </Box>
+              <Component {...pageProps} />
+            </Stack>
           </Stack>
         </AppThemeProvider>
       </MDXProvider>
