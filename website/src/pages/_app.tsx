@@ -1,15 +1,13 @@
-import 'remark-admonitions/styles/classic.css';
-import 'remark-admonitions/styles/infima.css';
-import 'prism-themes/themes/prism-dracula.css';
+import 'prism-themes/themes/prism-atom-dark.css';
 import 'tailwindcss/tailwind.css';
 
 import { appWithTranslation } from 'next-i18next';
+import Head from 'next/head';
 import { ReactNode, useMemo } from 'react';
+
+import { Box, chakra, ChakraProvider, extendTheme, Stack } from '@chakra-ui/react';
+import { components, ExtendComponents, iterateRoutes, MdxInternalProps, MDXNavigation, NextNProgress } from '@guild-docs/client';
 import { MDXProvider } from '@mdx-js/react';
-
-import { Box, ChakraProvider, extendTheme, chakra, Stack } from '@chakra-ui/react';
-
-import { NextNProgress, MdxInternalProps, MDXNavigation, iterateRoutes, components, ExtendComponents } from '@guild-docs/client';
 
 import type { AppProps } from 'next/app';
 
@@ -49,6 +47,11 @@ function App({ Component, pageProps }: AppProps) {
   }, [mdxRoutes]);
   return (
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
+        <link href="/admonitions.css" rel="stylesheet" />
+      </Head>
       <NextNProgress />
       <MDXProvider components={components}>
         <AppThemeProvider>
