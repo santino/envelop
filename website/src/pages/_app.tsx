@@ -1,6 +1,7 @@
 import 'remark-admonitions/styles/classic.css';
 import 'remark-admonitions/styles/infima.css';
 import 'prism-themes/themes/prism-dracula.css';
+import 'tailwindcss/tailwind.css';
 
 import { appWithTranslation } from 'next-i18next';
 import { ReactNode, useMemo } from 'react';
@@ -14,6 +15,8 @@ import type { AppProps } from 'next/app';
 
 const theme = extendTheme({
   colors: {},
+  initialColorMode: 'light',
+  useSystemColorMode: false,
 });
 
 const a = chakra('a', {

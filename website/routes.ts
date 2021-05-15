@@ -5,7 +5,10 @@ export function getRoutes(): IRoutes {
     _: {
       index: {
         $name: 'Home',
-        $routes: [['index', 'Home Page']],
+        $routes: [
+          ['index', 'Home Page'],
+          ['tailwind', 'Tailwind Page'],
+        ],
       },
     },
   };
