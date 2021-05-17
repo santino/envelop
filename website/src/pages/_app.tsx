@@ -39,7 +39,6 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
 const GuildHeader = dynamic<unknown>(() => import('../components/GuildHeader').then(v => v.GuildHeader), {
   ssr: false,
   loading() {
-    // We can set a skeleton to not have it suddenly appear and moving everything down
     return null;
   },
 });
