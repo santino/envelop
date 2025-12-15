@@ -1,5 +1,12 @@
 # @envelop/graphql-modules
 
+## 10.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af)]:
+  - @envelop/core@5.5.0
+
 ## 9.0.0
 
 ### Patch Changes

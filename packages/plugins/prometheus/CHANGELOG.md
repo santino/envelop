@@ -1,5 +1,13 @@
 # @envelop/prometheus
 
+## 15.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af), [`49346b2`](https://github.com/graphql-hive/envelop/commit/49346b237e22a779ff27fc41ea59ec916601df38)]:
+  - @envelop/core@5.5.0
+  - @envelop/on-resolve@8.0.0
+
 ## 14.0.0
 
 ### Patch Changes
@@ -92,13 +100,13 @@
   ## Example: trace only execution and subscription errors
 
   ```ts
-  import { execute, parse, specifiedRules, subscribe, validate } from 'graphql'
-  import { envelop, useEngine } from '@envelop/core'
-  import { usePrometheus } from '@envelop/prometheus'
+  import { execute, parse, specifiedRules, subscribe, validate } from "graphql";
+  import { envelop, useEngine } from "@envelop/core";
+  import { usePrometheus } from "@envelop/prometheus";
 
   const TRACKED_OPERATION_NAMES = [
     // make a list of operation that you want to monitor
-  ]
+  ];
 
   const getEnveloped = envelop({
     plugins: [
@@ -107,23 +115,23 @@
         metrics: {
           // Here, an array of phases can be provided to enable the metric only on certain phases.
           // In this example, only error happening during the execute and subscribe phases will tracked
-          graphql_envelop_phase_error: ['execute', 'subscribe']
-        }
-      })
-    ]
-  })
+          graphql_envelop_phase_error: ["execute", "subscribe"],
+        },
+      }),
+    ],
+  });
   ```
 
   ## Example: Monitor timing only of a set of operations by name
 
   ```ts
-  import { execute, parse, specifiedRules, subscribe, validate } from 'graphql'
-  import { envelop, useEngine } from '@envelop/core'
-  import { usePrometheus } from '@envelop/prometheus'
+  import { execute, parse, specifiedRules, subscribe, validate } from "graphql";
+  import { envelop, useEngine } from "@envelop/core";
+  import { usePrometheus } from "@envelop/prometheus";
 
   const TRACKED_OPERATION_NAMES = [
     // make a list of operation that you want to monitor
-  ]
+  ];
 
   const getEnveloped = envelop({
     plugins: [
@@ -133,20 +141,23 @@
           graphql_yoga_http_duration: createHistogram({
             registry,
             histogram: {
-              name: 'graphql_envelop_request_duration',
-              help: 'Time spent on HTTP connection',
-              labelNames: ['operationName']
+              name: "graphql_envelop_request_duration",
+              help: "Time spent on HTTP connection",
+              labelNames: ["operationName"],
             },
-            fillLabelsFn: ({ operationName }, _rawContext) => ({ operationName }),
-            phases: ['execute', 'subscribe'],
+            fillLabelsFn: ({ operationName }, _rawContext) => ({
+              operationName,
+            }),
+            phases: ["execute", "subscribe"],
 
             // Here `shouldObserve` control if the request timing should be observed, based on context
-            shouldObserve: ({ operationName }) => TRACKED_OPERATIONS.includes(operationName)
-          })
-        }
-      })
-    ]
-  })
+            shouldObserve: ({ operationName }) =>
+              TRACKED_OPERATIONS.includes(operationName),
+          }),
+        },
+      }),
+    ],
+  });
   ```
 
   ## Default Behavior Change
@@ -160,9 +171,9 @@
   usePrometheus({
     metrics: {
       graphql_envelop_phase_error: true,
-      graphql_envelop_phase_validate: true
-    }
-  })
+      graphql_envelop_phase_validate: true,
+    },
+  });
   ```
 
   This is no longer the case. If you were relying on this behavior, please use an array of string to
@@ -171,9 +182,9 @@
   ```ts
   usePrometheus({
     metrics: {
-      graphql_envelop_phase_error: ['validate']
-    }
-  })
+      graphql_envelop_phase_error: ["validate"],
+    },
+  });
   ```
 
 ## 11.0.0

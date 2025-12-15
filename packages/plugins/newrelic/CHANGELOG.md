@@ -1,5 +1,13 @@
 # @envelop/newrelic
 
+## 11.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af), [`49346b2`](https://github.com/graphql-hive/envelop/commit/49346b237e22a779ff27fc41ea59ec916601df38)]:
+  - @envelop/core@5.5.0
+  - @envelop/on-resolve@8.0.0
+
 ## 10.0.0
 
 ### Patch Changes
@@ -375,10 +383,11 @@
       // ... other plugins ...
       useNewRelic({
         // ...
-        extractOperationName: context => context.request.body.customOperationName
-      })
-    ]
-  })
+        extractOperationName: (context) =>
+          context.request.body.customOperationName,
+      }),
+    ],
+  });
   ```
 
 ### Patch Changes

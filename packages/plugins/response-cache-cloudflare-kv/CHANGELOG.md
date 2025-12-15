@@ -1,5 +1,12 @@
 # @envelop/response-cache-cloudflare-kv
 
+## 7.0.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @envelop/response-cache@10.0.0
+
 ## 6.0.0
 
 ### Patch Changes
@@ -78,34 +85,34 @@
   require the `ExecutionContext` or `KVNamespace` instance but only the name of the namespace
 
   ```ts
-  import { createSchema, createYoga, YogaInitialContext } from 'graphql-yoga'
-  import { useResponseCache } from '@envelop/response-cache'
-  import { createKvCache } from '@envelop/response-cache-cloudflare-kv'
-  import { resolvers } from './graphql-schema/resolvers.generated'
-  import { typeDefs } from './graphql-schema/typeDefs.generated'
+  import { createSchema, createYoga, YogaInitialContext } from "graphql-yoga";
+  import { useResponseCache } from "@envelop/response-cache";
+  import { createKvCache } from "@envelop/response-cache-cloudflare-kv";
+  import { resolvers } from "./graphql-schema/resolvers.generated";
+  import { typeDefs } from "./graphql-schema/typeDefs.generated";
 
   export type Env = {
-    GRAPHQL_RESPONSE_CACHE: KVNamespace
-  }
+    GRAPHQL_RESPONSE_CACHE: KVNamespace;
+  };
 
   const graphqlServer = createYoga<Env & ExecutionContext>({
     schema: createSchema({ typeDefs, resolvers }),
     plugins: [
       useResponseCache({
         cache: createKvCache({
-          KVName: 'GRAPHQL_RESPONSE_CACHE',
-          keyPrefix: 'graphql' // optional
+          KVName: "GRAPHQL_RESPONSE_CACHE",
+          keyPrefix: "graphql", // optional
         }),
         session: () => null,
         includeExtensionMetadata: true,
-        ttl: 1000 * 10 // 10 seconds
-      })
-    ]
-  })
+        ttl: 1000 * 10, // 10 seconds
+      }),
+    ],
+  });
 
   export default {
-    fetch: graphqlServer
-  }
+    fetch: graphqlServer,
+  };
   ```
 
 ### Patch Changes

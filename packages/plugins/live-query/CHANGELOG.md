@@ -1,5 +1,12 @@
 # @envelop/live-query
 
+## 11.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af)]:
+  - @envelop/core@5.5.0
+
 ## 10.0.0
 
 ### Patch Changes
@@ -240,15 +247,15 @@
   Thanks [@n1ru4l](https://github.com/n1ru4l)! - Support for plugging in a patch middleware.
 
   ```ts
-  import { applyLiveQueryJSONDiffPatchGenerator } from '@n1ru4l/graphql-live-query-patch-jsondiffpatch'
-  import { InMemoryLiveQueryStore } from '@n1ru4l/in-memory-live-query-store'
+  import { applyLiveQueryJSONDiffPatchGenerator } from "@n1ru4l/graphql-live-query-patch-jsondiffpatch";
+  import { InMemoryLiveQueryStore } from "@n1ru4l/in-memory-live-query-store";
 
-  const liveQueryStore = new InMemoryLiveQueryStore()
+  const liveQueryStore = new InMemoryLiveQueryStore();
 
   const plugin = useLiveQuery({
     liveQueryStore,
-    applyLiveQueryPatchGenerator: applyLiveQueryJSONDiffPatchGenerator
-  })
+    applyLiveQueryPatchGenerator: applyLiveQueryJSONDiffPatchGenerator,
+  });
   ```
 
 - Updated dependencies
