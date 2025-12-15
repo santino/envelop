@@ -1,5 +1,12 @@
 # @envelop/extended-validation
 
+## 8.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af)]:
+  - @envelop/core@5.5.0
+
 ## 7.0.0
 
 ### Patch Changes
@@ -91,8 +98,8 @@
   ```ts
   useGenericAuth({
     // ...
-    authDirectiveName: 'auth'
-  })
+    authDirectiveName: "auth",
+  });
   ```
 
   - [BREAKING] - Now `directiveOrExtensionFieldName` is renamed to `authDirectiveName`.
@@ -122,11 +129,11 @@
     auth directive or extension. So you don't need to parse the arguments manually anymore.
 
   ```ts
-  const validateUser: ValidateUserFn = params => {
-    if (!params.fieldAuthArgs.roles.includes('admin')) {
-      return createUnauthorizedError(params)
+  const validateUser: ValidateUserFn = (params) => {
+    if (!params.fieldAuthArgs.roles.includes("admin")) {
+      return createUnauthorizedError(params);
     }
-  }
+  };
   ```
 
   - `validateUser`'s `objectType` parameter is now renamed to `parentType`. And it takes the
@@ -139,43 +146,45 @@
     /** The user object. */
 
     /** The field node from the operation that is being validated. */
-    fieldNode: FieldNode
+    fieldNode: FieldNode;
     /** The parent type which has the field that is being validated. */
-    parentType: GraphQLObjectType | GraphQLInterfaceType
+    parentType: GraphQLObjectType | GraphQLInterfaceType;
     /** The auth directive arguments for the type */
-    typeAuthArgs?: Record<string, any>
+    typeAuthArgs?: Record<string, any>;
     /** The directives for the type */
-    typeDirectives?: ReturnType<typeof getDirectiveExtensions>
+    typeDirectives?: ReturnType<typeof getDirectiveExtensions>;
     /** Scopes that type requires */
-    typeScopes?: string[][]
+    typeScopes?: string[][];
     /** Policies that type requires */
-    typePolicies?: string[][]
+    typePolicies?: string[][];
     /** The object field */
-    field: GraphQLField<any, any>
+    field: GraphQLField<any, any>;
     /** The auth directive arguments for the field */
-    fieldAuthArgs?: Record<string, any>
+    fieldAuthArgs?: Record<string, any>;
     /** The directives for the field */
-    fieldDirectives?: ReturnType<typeof getDirectiveExtensions>
+    fieldDirectives?: ReturnType<typeof getDirectiveExtensions>;
     /** Scopes that field requires */
-    fieldScopes?: string[][]
+    fieldScopes?: string[][];
     /** Policies that field requires */
-    fieldPolicies?: string[][]
+    fieldPolicies?: string[][];
     /** Extracted scopes from the user object */
-    userScopes: string[]
+    userScopes: string[];
     /** Policies for the user */
-    userPolicies: string[]
+    userPolicies: string[];
     /** The args passed to the execution function (including operation context and variables) **/
-    executionArgs: ExecutionArgs
+    executionArgs: ExecutionArgs;
     /** Resolve path */
-    path: ReadonlyArray<string | number>
-  }
+    path: ReadonlyArray<string | number>;
+  };
   ```
 
   - New directives for role-based auth are added `@requiresScopes` and `@policy` for more granular
     control over the auth logic.
 
   ```graphql
-  directive @requiresScopes(scopes: [String!]!) on OBJECT | INTERFACE | FIELD_DEFINITION
+  directive @requiresScopes(
+    scopes: [String!]!
+  ) on OBJECT | INTERFACE | FIELD_DEFINITION
 
   directive @policy(policy: String!) on OBJECT | INTERFACE | FIELD_DEFINITION
   ```

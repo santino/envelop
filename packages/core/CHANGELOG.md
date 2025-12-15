@@ -1,5 +1,11 @@
 # @envelop/core
 
+## 5.5.0
+
+### Minor Changes
+
+- [#2113](https://github.com/graphql-hive/envelop/pull/2113) [`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af) Thanks [@andrew0](https://github.com/andrew0)! - Handle incremental execution errors in useErrorHandler
+
 ## 5.4.0
 
 ### Minor Changes
@@ -52,20 +58,20 @@
   data sharing between hooks.
 
   ```ts
-  import { withState } from '@envelop/core'
+  import { withState } from "@envelop/core";
 
-  type State = { foo: string }
+  type State = { foo: string };
 
   const myPlugin = () =>
     withState<Plugin, State>(() => ({
       onParse({ state }) {
-        state.forOperation.foo = 'foo'
+        state.forOperation.foo = "foo";
       },
       onValidate({ state }) {
-        const { foo } = state.forOperation
-        console.log('foo', foo)
-      }
-    }))
+        const { foo } = state.forOperation;
+        console.log("foo", foo);
+      },
+    }));
   ```
 
   The `state` payload field will be available in all relevant hooks, making it easy to access shared
@@ -82,14 +88,14 @@
 
   ```ts
   const myPlugin = () =>
-    withState(getState => ({
+    withState((getState) => ({
       onParse({ context }) {
         // You can provide a payload, which will dictate which scope you have access to.
         // The scope can contain `context`, `request` and `executionRequest` fields.
-        const state = getState({ context })
+        const state = getState({ context });
         // Use the state elsewhere.
-      }
-    }))
+      },
+    }));
   ```
 
 ## 5.2.3
@@ -167,25 +173,25 @@
   ### Basic usage
 
   ```ts
-  import { envelop } from '@envelop/core'
-  import Sentry from '@sentry/node'
+  import { envelop } from "@envelop/core";
+  import Sentry from "@sentry/node";
 
   const getEnveloped = envelop({
     plugins: [
       {
         instruments: {
           execute: ({ context }, wrapped) =>
-            Sentry.startSpan({ name: 'Graphql Operation' }, async () => {
+            Sentry.startSpan({ name: "Graphql Operation" }, async () => {
               try {
-                await wrapped()
+                await wrapped();
               } catch (err) {
-                Sentry.captureException(err)
+                Sentry.captureException(err);
               }
-            })
-        }
-      }
-    ]
-  })
+            }),
+        },
+      },
+    ],
+  });
   ```
 
   ### Mutliple instruments plugins
@@ -195,12 +201,12 @@
   last is inner most).
 
   ```ts
-  import { useOpentelemetry } from '@envelop/opentelemetry'
-  import { useSentry } from '@envelop/sentry'
+  import { useOpentelemetry } from "@envelop/opentelemetry";
+  import { useSentry } from "@envelop/sentry";
 
   const getEnveloped = envelop({
-    plugins: [useSentry(), useOpentelemetry()]
-  })
+    plugins: [useSentry(), useOpentelemetry()],
+  });
   ```
 
   ```mermaid
@@ -217,16 +223,16 @@
   instruments. This allows to have a different execution order of hooks and instruments.
 
   ```ts
-  import { useOpentelemetry } from '@envelop/opentelemetry'
-  import { composeInstruments, useSentry } from '@envelop/sentry'
+  import { useOpentelemetry } from "@envelop/opentelemetry";
+  import { composeInstruments, useSentry } from "@envelop/sentry";
 
-  const { instruments: sentryInstruments, ...sentryPlugin } = useSentry()
-  const { instruments: otelInstruments, ...otelPlugin } = useOpentelemetry()
-  const instruments = composeInstruments([otelInstruments, sentryInstruments])
+  const { instruments: sentryInstruments, ...sentryPlugin } = useSentry();
+  const { instruments: otelInstruments, ...otelPlugin } = useOpentelemetry();
+  const instruments = composeInstruments([otelInstruments, sentryInstruments]);
 
   const getEnveloped = envelop({
-    plugins: [{ instruments }, sentryPlugin, otelPlugin]
-  })
+    plugins: [{ instruments }, sentryPlugin, otelPlugin],
+  });
   ```
 
   ```mermaid
@@ -702,13 +708,13 @@
       onPluginInit(context) {
         context.registerContextErrorHandler(({ context }) => {
           console.error(
-            'Error occurred during context creation but at least I have the  context so far',
-            context
-          )
-        })
-      }
-    }
-  }
+            "Error occurred during context creation but at least I have the  context so far",
+            context,
+          );
+        });
+      },
+    };
+  };
   ```
 
 ### Patch Changes
@@ -725,8 +731,8 @@
   ```ts
   useMaskedErrors({
     handleParseErrors: true,
-    handleValidateErrors: true
-  })
+    handleValidateErrors: true,
+  });
   ```
 
   This option is disabled by default as validation and parse errors are expected errors that help
@@ -784,20 +790,20 @@
   extending the context object.
 
   ```ts
-  import type { Plugin } from '@envelop/core'
+  import type { Plugin } from "@envelop/core";
 
-  const sharedStateSymbol = Symbol('sharedState')
+  const sharedStateSymbol = Symbol("sharedState");
 
   const plugin: Plugin = {
     onExecute({ extendContext }) {
-      extendContext({ [sharedStateSymbol]: { value: 1 } })
+      extendContext({ [sharedStateSymbol]: { value: 1 } });
     },
     onResolverCalled({ context }) {
-      const sharedState = context[sharedStateSymbol]
+      const sharedState = context[sharedStateSymbol];
       // logs 1
-      console.log(sharedState.value)
-    }
-  }
+      console.log(sharedState.value);
+    },
+  };
   ```
 
 ### Minor Changes
@@ -812,16 +818,16 @@
   by skipping context building.
 
   ```ts
-  import { envelop, useImmediateIntrospection } from '@envelop/core'
-  import { schema } from './schema'
+  import { envelop, useImmediateIntrospection } from "@envelop/core";
+  import { schema } from "./schema";
 
   const getEnveloped = envelop({
     plugins: [
       useSchema(schema),
-      useImmediateIntrospection()
+      useImmediateIntrospection(),
       // additional plugins
-    ]
-  })
+    ],
+  });
   ```
 
 ### Patch Changes
@@ -844,7 +850,7 @@
   via the `isDev` option and the `defaultErrorFormatter`.
 
   ```ts
-  useMaskedErrors({ isDev: true })
+  useMaskedErrors({ isDev: true });
   ```
 
   On Node.js environments the `isDev` default value is `true` if
@@ -972,12 +978,12 @@
     return {
       onPluginInit(context) {
         context.registerContextErrorHandler(({ error, setError }) => {
-          console.error('Error occurred during context creation.', error)
-          setError(new Error('Something went wrong :('))
-        })
-      }
-    }
-  }
+          console.error("Error occurred during context creation.", error);
+          setError(new Error("Something went wrong :("));
+        });
+      },
+    };
+  };
   ```
 
 - 7704fc3: `useMaskedErrors` now masks errors thrown during context creation (calling
@@ -993,11 +999,11 @@
   const getEnveloped = envelop({
     plugins: [
       useExtendContext(() => {
-        throw new Error('Oooooops.')
+        throw new Error("Oooooops.");
       }),
-      useMaskedErrors()
-    ]
-  })
+      useMaskedErrors(),
+    ],
+  });
   ```
 
 - 7704fc3: useMaskedErrors now also handles errors that are occurring during subscriptions.
@@ -1015,9 +1021,9 @@
 
   ```ts
   // deprecated (removed in GraphQL.js 16)
-  execute(schema, ...args)
+  execute(schema, ...args);
   // how it should be done
-  execute({ schema, ...args })
+  execute({ schema, ...args });
   ```
 
   This fixes an edge-case with graphql frameworks that call execute with the old and deprecated

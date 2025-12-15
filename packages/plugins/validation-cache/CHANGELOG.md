@@ -1,5 +1,15 @@
 # @envelop/validation-cache
 
+## 11.0.0
+
+### Patch Changes
+
+- [#2782](https://github.com/graphql-hive/envelop/pull/2782) [`2c0ce13`](https://github.com/graphql-hive/envelop/commit/2c0ce1346fec9318478f453c3b8a05d1c096974e) Thanks [@renovate](https://github.com/apps/renovate)! - dependencies updates:
+  - Added dependency [`object-hash@^3.0.0` ↗︎](https://www.npmjs.com/package/object-hash/v/3.0.0) (to `dependencies`)
+  - Removed dependency [`hash-it@^6.0.0` ↗︎](https://www.npmjs.com/package/hash-it/v/6.0.0) (from `dependencies`)
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af)]:
+  - @envelop/core@5.5.0
+
 ## 10.0.0
 
 ### Patch Changes

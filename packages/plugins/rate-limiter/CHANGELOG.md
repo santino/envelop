@@ -1,5 +1,47 @@
 # @envelop/rate-limiter
 
+## 10.0.0
+
+### Major Changes
+
+- [#1323](https://github.com/graphql-hive/envelop/pull/1323) [`cecd3f6`](https://github.com/graphql-hive/envelop/commit/cecd3f61300ecb3d276a92f821b4703663210174) Thanks [@ardatan](https://github.com/ardatan)! - Rate Limiter no longer gets attached to the resolvers and use `onExecute` hook instead.
+  This improves performance by reducing the number of function calls, and issues with multiple plugins trying to wrap the same resolver.
+
+  `onRateLimitError` no longer receives `info` object, but receives `type` and `field` instead.
+  `interpolateMessage` also receives `type` and `field` instead of `info`.
+
+  ```diff
+  onRateLimitError({
+      error: string;
+      identifier: string;
+      context: unknown;
+  -   info: GraphQLResolveInfo;
+  +   type: GraphQLNamedOutputType;
+  +   field: GraphQLField<any, any>;
+  })
+  ```
+
+  ```diff
+  interpolateMessage(
+      message: string,
+      identifier: string,
+      params: {
+          root: unknown;
+          args: Record<string, unknown>;
+          context: unknown;
+  -       info: GraphQLResolveInfo;
+  +       type: GraphQLNamedOutputType;
+  +       field: GraphQLField<any, any>;
+      }
+  ): string
+  ```
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af), [`49346b2`](https://github.com/graphql-hive/envelop/commit/49346b237e22a779ff27fc41ea59ec916601df38)]:
+  - @envelop/core@5.5.0
+  - @envelop/on-resolve@8.0.0
+
 ## 9.0.0
 
 ### Patch Changes
@@ -190,20 +232,22 @@
   useRateLimiter({
     configByField: [
       {
-        type: 'Query',
-        field: 'search', // You can also use glob patterns
+        type: "Query",
+        field: "search", // You can also use glob patterns
         max: 10,
-        window: '1m',
+        window: "1m",
         message:
-          'My custom message with interpolated values: ${args.searchTerm} and ${context.user.id}'
-      }
+          "My custom message with interpolated values: ${args.searchTerm} and ${context.user.id}",
+      },
     ],
     interpolateMessage: (message, args, context) => {
       return message.replace(/\${(.*?)}/g, (_, key) => {
-        return key.split('.').reduce((acc, part) => acc[part], { args, context })
-      })
-    }
-  })
+        return key
+          .split(".")
+          .reduce((acc, part) => acc[part], { args, context });
+      });
+    },
+  });
   ```
 
 - [#2292](https://github.com/n1ru4l/envelop/pull/2292)
@@ -231,13 +275,13 @@
   useRateLimiter({
     configByField: [
       {
-        type: 'Query',
-        field: 'search', // You can also use glob patterns
+        type: "Query",
+        field: "search", // You can also use glob patterns
         max: 10,
-        window: '1m'
-      }
-    ]
-  })
+        window: "1m",
+      },
+    ],
+  });
   ```
 
 ### Patch Changes

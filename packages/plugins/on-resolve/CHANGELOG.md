@@ -1,5 +1,39 @@
 # @envelop/on-resolve
 
+## 8.0.0
+
+### Minor Changes
+
+- [#2747](https://github.com/graphql-hive/envelop/pull/2747) [`49346b2`](https://github.com/graphql-hive/envelop/commit/49346b237e22a779ff27fc41ea59ec916601df38) Thanks [@cecchi](https://github.com/cecchi)! - Add option to ignore default resolvers in opentelemetry instrumentation
+
+  To reduce telemetry data volume and noise in traces, it is recommended to ignore resolvers with the
+  default implementation since they probably doesn't do anything worth tracking.
+
+  ## Usage
+
+  ```ts
+  import { execute, parse, specifiedRules, subscribe, validate } from "graphql";
+  import { envelop, useEngine } from "@envelop/core";
+  import { useOpenTelemetry } from "@envelop/opentelemetry";
+
+  const getEnveloped = envelop({
+    plugins: [
+      useEngine({ parse, validate, specifiedRules, execute, subscribe }),
+      // ... other plugins ...
+
+      useOpenTelemetry({
+        resolvers: true,
+        defaultResolvers: false, // explicitly disable default resolvers tracing. Defaults to `true`
+      }),
+    ],
+  });
+  ```
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af)]:
+  - @envelop/core@5.5.0
+
 ## 7.0.0
 
 ### Patch Changes

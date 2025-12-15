@@ -1,5 +1,12 @@
 # @envelop/response-cache
 
+## 10.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d3d83bc`](https://github.com/graphql-hive/envelop/commit/d3d83bca20ba03e6c145fbd6449d5b56602627af)]:
+  - @envelop/core@5.5.0
+
 ## 9.0.0
 
 ### Patch Changes
@@ -605,35 +612,35 @@
   to the following:
 
   ```ts
-  import { envelop } from '@envelop/core'
-  import { useResponseCache } from '@envelop/response-cache'
+  import { envelop } from "@envelop/core";
+  import { useResponseCache } from "@envelop/response-cache";
 
   const getEnveloped = envelop({
     plugins: [
       // ... other plugins ...
       useResponseCache({
         // use global cache for all operations
-        session: () => null
-      })
-    ]
-  })
+        session: () => null,
+      }),
+    ],
+  });
   ```
 
   Otherwise, you should return from your cache function a value that uniquely identifies the viewer.
 
   ```ts
-  import { envelop } from '@envelop/core'
-  import { useResponseCache } from '@envelop/response-cache'
+  import { envelop } from "@envelop/core";
+  import { useResponseCache } from "@envelop/response-cache";
 
   const getEnveloped = envelop({
     plugins: [
       // ... other plugins ...
       useResponseCache({
         // return null as a fallback for caching the result globally
-        session: context => context.user?.id ?? null
-      })
-    ]
-  })
+        session: (context) => context.user?.id ?? null,
+      }),
+    ],
+  });
   ```
 
 - a5d8dcb: **Better default document string storage**
@@ -653,13 +660,13 @@
   **Custom document string caching example.**
 
   ```ts
-  const myCache = new WeakMap<DocumentNode, string>()
+  const myCache = new WeakMap<DocumentNode, string>();
 
   // Let's say you keep parse results in somewhere else like below
   function parseDocument(document: string): DocumentNode {
-    const parsedDocument = parse(document)
-    myCache.set(parsedDocument, document)
-    return parsedDocument
+    const parsedDocument = parse(document);
+    myCache.set(parsedDocument, document);
+    return parsedDocument;
   }
 
   // Then you can interact with your existing caching solution inside the response cache plugin like below
@@ -667,14 +674,14 @@
     getDocumentString(document: DocumentNode): string {
       // You can also add a fallback to `graphql-js`'s print function
       // to let the plugin works
-      const possibleDocumentStr = myCache.get(document)
+      const possibleDocumentStr = myCache.get(document);
       if (!possibleDocumentStr) {
-        console.warn(`Something might be wrong with my cache setup`)
-        return print(document)
+        console.warn(`Something might be wrong with my cache setup`);
+        return print(document);
       }
-      return possibleDocumentStr
-    }
-  })
+      return possibleDocumentStr;
+    },
+  });
   ```
 
   **Migration from `getDocumentStringFromContext`.**
@@ -683,18 +690,21 @@
 
   ```ts
   function getDocumentStringFromContext(contextValue: any) {
-    return contextValue.myDocumentString
+    return contextValue.myDocumentString;
   }
   ```
 
   You have to change it to the following;
 
   ```ts
-  import { print } from 'graphql'
+  import { print } from "graphql";
 
   function getDocumentString(executionArgs: ExecutionArgs) {
     // We need to fallback to `graphql`'s print to return a value no matter what.
-    return executionArgs.contextValue.myDocumentString ?? print(executionArgs.document)
+    return (
+      executionArgs.contextValue.myDocumentString ??
+      print(executionArgs.document)
+    );
   }
   ```
 
